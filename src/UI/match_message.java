@@ -94,7 +94,7 @@ public class match_message {
                     if(name!="") {
                         name_label.setText("姓名：" + name);
                         tem_label.setText("体温：36.61");
-                        db.executeQuery("record_all" + "(time,tem,location,name)", '\'' + df.format(new Date()) + '\'' + ",'36.61','黑龙江省','" + name + '\'');
+                        db.executeInsert("record_all" + "(time,tem,location,name)", '\'' + df.format(new Date()) + '\'' + ",'36.61','黑龙江省','" + name + '\'');
                     }else{
                         name_label.setText("姓名：无匹配");
                         tem_label.setText("体温：36.48");

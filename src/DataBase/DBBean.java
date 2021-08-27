@@ -5,7 +5,7 @@ import java.sql.*;
 
 public class DBBean {
     private String driverStr = "com.mysql.jdbc.Driver";
-    private String connStr = "jdbc:mysql://cdb-fugoxito.cd.tencentcdb.com:10200/safe2?serverTimezone=UTC";
+    private String connStr = "jdbc:mysql://cdb-fugoxito.cd.tencentcdb.com:10200/safe?serverTimezone=UTC";
     private String dbusername = "root";
     private String dbpassword = "zhege00++";
     private Connection conn = null;
@@ -168,7 +168,7 @@ public class DBBean {
     public ResultSet executeTablehead(String table_name) {
         ResultSet resultSet = null;
         String sql = "SELECT COLUMN_NAME FROM information_schema.COLUMNS WHERE TABLE_SCHEMA " +
-                "= 'safe2' AND TABLE_NAME = '" + table_name + "'";
+                "= 'safe' AND TABLE_NAME = '" + table_name + "'";
         System.out.println(sql);
         try {
             resultSet = stmt.executeQuery(sql);
@@ -186,8 +186,8 @@ public class DBBean {
      * @param value      要传入的值   字符串需要打单引号          eg:1,'sxz',20
      *                   dbBean.execQuery("nameandpassword(user_name,user_password,age)","'yzj','654321',10");
      */
-    public int executeQuery(String table_name, String value) {
-        String sql = "insert ignore into safe2." + table_name + "values" + "(" + value + ")";//定义一个插入语句
+    public int executeInsert(String table_name, String value) {
+        String sql = "insert ignore into safe." + table_name + "values" + "(" + value + ")";//定义一个插入语句
         int x = 0;
         System.out.println(sql);
         try {

@@ -4,10 +4,8 @@ import DataBase.DBBean;
 import MyUI.*;
 //import com.github.sarxos.webcam.Webcam;
 //import com.github.sarxos.webcam.WebcamPanel;
-import withAndroidCamera.withCamera;
 
 import javax.swing.*;
-import javax.swing.border.LineBorder;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import java.awt.*;
@@ -211,9 +209,9 @@ public class inf {
         String idnumber_in0 = idnumber_in.getText();
         String secret_in0 = secret_in.getText();
         if (if_power)
-            db.executeQuery("person(name,tel,home_location,id_number,secret,power,face)", '\'' + name_in0 + '\'' + ',' + '\'' + tel_in0 + '\'' + ',' + '\'' + home_in0 + '\'' + ',' + '\'' + idnumber_in0 + '\'' + ',' + '\'' + secret_in0 + '\'' + ",1,1");
+            db.executeInsert("person(name,tel,home_location,id_number,secret,power,face)", '\'' + name_in0 + '\'' + ',' + '\'' + tel_in0 + '\'' + ',' + '\'' + home_in0 + '\'' + ',' + '\'' + idnumber_in0 + '\'' + ',' + '\'' + secret_in0 + '\'' + ",1,1");
         else
-            db.executeQuery("person(name,tel,home_location,id_number,secret,power,face)", '\'' + name_in0 + '\'' + ',' + '\'' + tel_in0 + '\'' + ',' + '\'' + home_in0 + '\'' + ',' + '\'' + idnumber_in0 + '\'' + ',' + '\'' + secret_in0 + '\'' + ",0,1");
+            db.executeInsert("person(name,tel,home_location,id_number,secret,power,face)", '\'' + name_in0 + '\'' + ',' + '\'' + tel_in0 + '\'' + ',' + '\'' + home_in0 + '\'' + ',' + '\'' + idnumber_in0 + '\'' + ',' + '\'' + secret_in0 + '\'' + ",0,1");
 
         ResultSet re = db.executeFindMAXID("person", "id");
         try {
