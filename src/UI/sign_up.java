@@ -18,7 +18,7 @@ public class sign_up {
     public ImageIcon imagetoshow2 = new ImageIcon("data_before\\match\\secret.png");
     public JLabel pi2 = new JLabel(imagetoshow2);
     public JTextField name_in = new JTextField();
-    public JTextField secret_in = new JTextField();
+    public JPasswordField secret_in = new JPasswordField();
     public RoundedBorder save = new RoundedBorder("登录");
     public JLabel title = new JLabel("智慧静脉");
     public JLabel name = new JLabel("ID");
@@ -34,6 +34,7 @@ public class sign_up {
 
     public sign_up() {
         frame = new JFrame();
+        secret_in.setEchoChar('*');
         frame.setUndecorated(true); // 去掉窗口的装饰
         frame.getRootPane().setWindowDecorationStyle(JRootPane.NONE);//采用指定的窗口装饰风格
         p2.setBackground(new Color(254, 254, 254));

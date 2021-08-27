@@ -4,6 +4,7 @@ import java.sql.*;
 
 
 public class DBBean {
+
     private String driverStr = "com.mysql.jdbc.Driver";
     private String connStr = "jdbc:mysql://cdb-fugoxito.cd.tencentcdb.com:10200/safe?serverTimezone=UTC";
     private String dbusername = "root";
@@ -54,9 +55,9 @@ public class DBBean {
         int result = 0;
         String sql = null;
         sql = "create table " + tableName +
-                "(time varchar(100) NOT NULL UNIQUE KEY" +
-                ",tem varchar(100) NOT NULL" +
-                ",location varchar(100) NOT NULL)";
+            "(time varchar(100) NOT NULL UNIQUE KEY" +
+            ",tem varchar(100) NOT NULL" +
+            ",location varchar(100) NOT NULL)";
 
         System.out.println("--创建新的表:" + sql + "\n");
         try {
@@ -138,6 +139,28 @@ public class DBBean {
         return rs;
     }
 
+    /**
+     * @param value
+     * @param tableName
+     * @param index
+     * @return java.sql.ResultSet
+     * @description: 模糊搜索
+     * @author 91657
+     * @date 2:14
+     */
+    public ResultSet executeFindLike(String value, String tableName, String index) {
+        ResultSet rs = null;
+        String sql = "select * from " + tableName + " where " + index + " like" + "'%" + value + "%'";//定义一个查询语句
+        System.out.print("--查询语句:" + sql + "\n");
+        try {
+            rs = stmt.executeQuery(sql);
+            System.out.println(rs);
+        } catch (Exception ex) {
+            System.out.println(ex);
+            System.out.println("ִ执行查询错误！");
+        }
+        return rs;
+    }
 
     /**
      * 查询数据库中全部数据
@@ -168,7 +191,7 @@ public class DBBean {
     public ResultSet executeTablehead(String table_name) {
         ResultSet resultSet = null;
         String sql = "SELECT COLUMN_NAME FROM information_schema.COLUMNS WHERE TABLE_SCHEMA " +
-                "= 'safe' AND TABLE_NAME = '" + table_name + "'";
+            "= 'safe' AND TABLE_NAME = '" + table_name + "'";
         System.out.println(sql);
         try {
             resultSet = stmt.executeQuery(sql);
