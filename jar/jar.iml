@@ -7,7 +7,7 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" name="wkr" level="project" />
     <orderEntry type="library" name="javacv-bin" level="project" />
+    <orderEntry type="library" name="wkr" level="project" />
   </component>
 </module>

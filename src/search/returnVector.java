@@ -2,6 +2,7 @@ package search;
 
 import DataBase.DBBean;
 
+import com.mysql.cj.util.StringUtils;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Vector;
@@ -77,7 +78,8 @@ public class returnVector {
 
     public static Vector<Vector<Object>> FromDBRead(DBBean db, String tablename, Vector<Object> vector, String value, String index) {
         Vector<Vector<Object>> res = new Vector<Vector<Object>>();
-        ResultSet temp = db.executeFind(value, tablename, index);
+        //查询全部
+        ResultSet temp = db.executeFindLike(value, tablename, index);
         while (true) {
 
             try {

@@ -3,6 +3,8 @@ package UI;
 import DataBase.DBBean;
 import MyUI.NewScrollBarUI;
 import MyUI.RoundedBorder;
+import com.mysql.cj.util.StringUtils;
+import org.python.core.util.StringUtil;
 import search.returnVector;
 import search.table;
 
