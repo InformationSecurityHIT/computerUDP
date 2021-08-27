@@ -28,30 +28,14 @@ public class match_runnable  implements Runnable{
 //            e.printStackTrace();
 //        }
     }
+
     @Override
     public void run() {
-        try{
-            System.out.println("开始发送数据...");
-            send_message(this.command,this.dataOutput);
-            for(int i=0;i<this.paths.size();i++){
-                System.out.println("发送第"+i+"张图片");
-                send_image(this.dataOutput,this.paths.get(i));
-            }
-            while(true){
-                int size = this.dataInput.readInt();
-                if(size<=0) continue;
-                byte[] data = new byte[size];
-                int len = 0;
-                //将二进制数据写入data数组
-                while (len < size) {len += dataInput.read(data, len, size - len); }
-                String temp = parse_command(data);
-                if(temp.equals("continue")) continue;
-                this.match_result = temp;
-                System.out.println("成功接收数据");
-                break;
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
+        System.out.println("开始发送数据...");
+        send_message(this.command,this.dataOutput);
+        for(int i=0;i<this.paths.size();i++){
+            System.out.println("发送第"+i+"张图片");
+            send_image(this.dataOutput,this.paths.get(i));
         }
     }
     public String parse_command(byte[] data){

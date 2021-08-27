@@ -156,7 +156,6 @@ public class input {
                     for (int i = 0; i < 3; i++) {
                         String fileName = "data_before\\" + finalId + "\\" + finalId + "_" + (5*j + i);
                         paths.add(fileName+".png");
-                        //FIXME
                         //这个地方从vein_image_panel中获得图片并保存
                         ImageIcon icon = (ImageIcon) vein_image_panel.getIcon();
                         BufferedImage bi = new BufferedImage(icon.getIconWidth(),
@@ -185,27 +184,30 @@ public class input {
 //                        interruptedException.printStackTrace();
 //                    }
                 }
+
+                //FIXME
+                wCloud.submit(new register_runnable(finalId, paths, wCloud.getSocket()));
                 Tips_text.setText("录入结束");
 //                System.out.println("拍照完成");
 
-                try {
-                    System.out.println(PATH + "process\\process_all_imgs_for_register.py");
-                    //调用脚本去处理录入图片
-                    String[] args_register = new String[]{"python", PATH + "\\process\\process_all_imgs_for_register.py",
-                            PATH + "\\data_before\\" + finalId,
-                            PATH + "\\data_after\\" + finalId,
-                            PATH + "\\keyPoint\\" + finalId};
-                    Process proc_register = Runtime.getRuntime().exec(args_register);
-                    String line = null;
-                    String tmp;
-                    BufferedReader in = new BufferedReader(new InputStreamReader(proc_register.getInputStream()));
-                    while ((tmp = in.readLine()) != null) {
-                        line = tmp;
-                        System.out.println(line);
-                    }
-                    in.close();
-                    proc_register.destroy();
-                }catch (IOException e){}
+//                try {
+//                    System.out.println(PATH + "process\\process_all_imgs_for_register.py");
+//                    //调用脚本去处理录入图片
+//                    String[] args_register = new String[]{"python", PATH + "\\process\\process_all_imgs_for_register.py",
+//                            PATH + "\\data_before\\" + finalId,
+//                            PATH + "\\data_after\\" + finalId,
+//                            PATH + "\\keyPoint\\" + finalId};
+//                    Process proc_register = Runtime.getRuntime().exec(args_register);
+//                    String line = null;
+//                    String tmp;
+//                    BufferedReader in = new BufferedReader(new InputStreamReader(proc_register.getInputStream()));
+//                    while ((tmp = in.readLine()) != null) {
+//                        line = tmp;
+//                        System.out.println(line);
+//                    }
+//                    in.close();
+//                    proc_register.destroy();
+//                }catch (IOException e){}
                 //executor.execute(new register_runnable(finalId.toString(), paths, wCloud.getSocket()));
 //                wCloud.submit(new register_runnable(finalId.toString(),paths,wCloud.getSocket()));
             }
