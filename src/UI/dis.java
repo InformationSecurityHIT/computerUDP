@@ -347,7 +347,7 @@ public class dis {
         @Override
         public void keyPressed(KeyEvent e) {
             char charA = e.getKeyChar();
-//            System.out.println("你按了《"+charA+"》键");
+            System.out.println("你按了《"+charA+"》键");
             //生成36到37的随机数
             //Math.random()    [0,1]
             double tempre = 36 + Math.random();
