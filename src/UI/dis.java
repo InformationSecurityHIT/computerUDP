@@ -2,6 +2,8 @@ package UI;
 
 import DataBase.DBBean;
 import MyUI.RoundedBorder;
+import cloud.match_runnable;
+import cloud.register_runnable;
 import tem.gettem;
 
 import javax.imageio.ImageIO;
@@ -124,10 +126,11 @@ public class dis {
                                 System.out.println(fileName1);
                             }catch (IOException e){}
                         }
+                        //FIXME
+                        wCloud.submit(new match_runnable(paths, wCloud.getSocket()));
                         cut.setText("终止");
                     }
                 }).start();
-
 
                 try {
                     String[] args = new String[]{"python", PATH + "\\process\\process_one_img_for_match.py",

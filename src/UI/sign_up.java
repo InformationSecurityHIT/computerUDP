@@ -70,10 +70,12 @@ public class sign_up {
         save.setOpaque(false);
         save.setBounds(750, 550, 300, 40);
         save.addMouseListener(new java.awt.event.MouseAdapter() {
+            @Override
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 btnNewButtonMouseEntered(evt, save);
             }
 
+            @Override
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 btnNewButtonMouseExited(evt, save);
             }
@@ -92,6 +94,7 @@ public class sign_up {
         p2.add(save);
         p2.add(back);
         save.addActionListener(new ActionListener() {
+            @Override
             public void actionPerformed(ActionEvent e) {
                 try {
 //                            System.out.println("******************************");
@@ -99,12 +102,13 @@ public class sign_up {
                     String sec = secret_in.getText();
                     ResultSet re = db.executeFind(id, "person", "id");
 //                            System.out.println(re);
-                    while (re.next())
+                    while (re.next()) {
                         if (re.getString("secret").equals(sec)&&re.getString("power").equals("1")) {
                             frame.dispose();
                             uimain ui = new uimain(db);
                             ui.begin();
                         }
+                    }
                 } catch (Exception exception) {
                     exception.printStackTrace();
                 }
