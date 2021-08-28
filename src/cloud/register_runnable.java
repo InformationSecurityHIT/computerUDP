@@ -17,6 +17,8 @@ public class register_runnable implements Runnable{
 
             this.socket = socket;
             this.dataOutput = new DataOutputStream(this.socket.getOutputStream());
+            //TODO  云端发送命令
+//            this.command = "register_" + name;
             this.command = "image_" + name;
             this.paths = paths;
         } catch (IOException e) {

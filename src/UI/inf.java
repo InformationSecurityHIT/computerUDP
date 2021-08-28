@@ -38,7 +38,7 @@ public class inf {
     private JPanel p2, basic = new JPanel(), other = new JPanel();
     private DBBean db;
     private JLabel label;
-    String id0 = null;
+    String tel = null;
     String name = null;
 
     boolean if_power;
@@ -216,15 +216,15 @@ public class inf {
         ResultSet re = db.executeFindMAXID("person", "id");
         try {
             while (re.next()) {
-                id0 = re.getString("id");
+                tel = re.getString("tel");
 //                name = re.getString("name");
             }
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
 
-        System.out.println(id0);
-        input in = new input(label, p2, id0);
+        System.out.println(tel);
+        input in = new input(label, p2, tel);
         in.inpanel();
         in.take_picture();
     }

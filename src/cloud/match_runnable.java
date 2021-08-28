@@ -18,25 +18,49 @@ public class match_runnable  implements Runnable{
     private List<String>paths;
     private String match_result = null;
     public match_runnable(List<String> paths,Socket socket) {
-//        try {
-//            this.socket = socket;
-//            this.command = "match";
-//            this.dataOutput = new DataOutputStream(this.socket.getOutputStream());
-//            this.dataInput = new DataInputStream(this.socket.getInputStream());
-//            this.paths = paths;
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
+        try {
+            this.socket = socket;
+            this.command = "match";
+            this.dataOutput = new DataOutputStream(this.socket.getOutputStream());
+            this.dataInput = new DataInputStream(this.socket.getInputStream());
+            this.paths = paths;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
-
     @Override
     public void run() {
+        //TODO  云端   FIXME
         System.out.println("开始发送数据...");
         send_message(this.command,this.dataOutput);
         for(int i=0;i<this.paths.size();i++){
             System.out.println("发送第"+i+"张图片");
             send_image(this.dataOutput,this.paths.get(i));
         }
+        //TODO 本地处理
+//        try{
+//            System.out.println("开始发送数据...");
+//            send_message(this.command,this.dataOutput);
+//            for(int i=0;i<this.paths.size();i++){
+//                System.out.println("发送第"+i+"张图片");
+//                send_image(this.dataOutput,this.paths.get(i));
+//            }
+//            while(true){
+//                int size = this.dataInput.readInt();
+//                if(size<=0) continue;
+//                byte[] data = new byte[size];
+//                int len = 0;
+//                //将二进制数据写入data数组
+//                while (len < size) {len += dataInput.read(data, len, size - len); }
+//                String temp = parse_command(data);
+//                if(temp.equals("continue")) continue;
+//                this.match_result = temp;
+//                System.out.println("成功接收数据");
+//                break;
+//            }
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
     }
     public String parse_command(byte[] data){
         return new String(data);

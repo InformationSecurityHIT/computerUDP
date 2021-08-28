@@ -2,6 +2,8 @@ package UI;
 
 import DataBase.DBBean;
 import MyUI.*;
+import com.mysql.cj.util.StringUtils;
+import org.python.core.util.StringUtil;
 
 import javax.swing.*;
 import java.awt.*;
@@ -10,8 +12,11 @@ import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import java.sql.ResultSet;
+import java.text.DateFormat;
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Locale;
 
 public class match_message {
     JFrame frame= new JFrame();
@@ -85,6 +90,7 @@ public class match_message {
         sea.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 try {
+                    DecimalFormat df=new DecimalFormat("######.00");
                     String tel = search.getText();
                     ResultSet re = db.executeFind(tel, "person", "tel");
                     name="";
@@ -92,12 +98,16 @@ public class match_message {
                         name = re.getString("name");
                     System.out.println(name);
                     if(name!="") {
+                        String temString = 36 + df.format(Math.random());
                         name_label.setText("姓名：" + name);
-                        tem_label.setText("体温：36.61");
-                        db.executeInsert("record_all" + "(time,tem,location,name)", '\'' + df.format(new Date()) + '\'' + ",'36.61','黑龙江省','" + name + '\'');
+                        tem_label.setText("体温："+temString);
+//                        DateFormat df2 = DateFormat.getDateInstance(DateFormat.MEDIUM, Locale.CHINA);
+                        SimpleDateFormat df2 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                        db.executeInsert("record_all" + "(time,tem,location,name)", '\'' + df2.format(new Date()) + '\'' + ",'"+temString+"','黑龙江省','" + name + '\'');
+                        frame.dispose();
                     }else{
                         name_label.setText("姓名：无匹配");
-                        tem_label.setText("体温：36.48");
+                        tem_label.setText("体温："+(36 + df.format(Math.random())));
                     }
                     frame.dispose();
                 } catch (Exception exception) {

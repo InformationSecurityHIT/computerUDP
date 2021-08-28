@@ -2,6 +2,7 @@ package UI;
 
 import DataBase.DBBean;
 import MyUI.*;
+import org.python.google.common.collect.Maps;
 
 import javax.swing.*;
 import java.awt.*;
@@ -9,6 +10,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Map;
 
 public class sign_up {
     JFrame frame;
@@ -21,7 +23,7 @@ public class sign_up {
     public JPasswordField secret_in = new JPasswordField();
     public RoundedBorder save = new RoundedBorder("登录");
     public JLabel title = new JLabel("智慧静脉");
-    public JLabel name = new JLabel("ID");
+    public JLabel name = new JLabel("TEL");
     public JLabel secret = new JLabel("密码");
     DBBean db = new DBBean();
     public ImageIcon bg = new ImageIcon("data_before\\match\\background.jpeg");
@@ -70,12 +72,10 @@ public class sign_up {
         save.setOpaque(false);
         save.setBounds(750, 550, 300, 40);
         save.addMouseListener(new java.awt.event.MouseAdapter() {
-            @Override
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 btnNewButtonMouseEntered(evt, save);
             }
 
-            @Override
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 btnNewButtonMouseExited(evt, save);
             }
@@ -94,18 +94,25 @@ public class sign_up {
         p2.add(save);
         p2.add(back);
         save.addActionListener(new ActionListener() {
-            @Override
             public void actionPerformed(ActionEvent e) {
                 try {
 //                            System.out.println("******************************");
-                    String id = name_in.getText();
+                    Map<String, Integer> idTelMap = Maps.newHashMap();
+                    ResultSet resultMap = db.executeFindAll("person");
+                    while (resultMap.next()) {
+                        idTelMap.put(resultMap.getString("tel"), Integer.valueOf(resultMap.getString("id")));
+                    }
+                    if(!idTelMap.containsKey(name_in.getText())){
+                        System.out.println("用户名字密码错误");
+                    }
+                    String id =idTelMap.get(name_in.getText()).toString();
                     String sec = secret_in.getText();
                     ResultSet re = db.executeFind(id, "person", "id");
 //                            System.out.println(re);
                     while (re.next()) {
-                        if (re.getString("secret").equals(sec)&&re.getString("power").equals("1")) {
+                        if (re.getString("secret").equals(sec) && re.getString("power").equals("1")) {
                             frame.dispose();
-                            uimain ui = new uimain(db);
+                            uimain ui = new uimain(db,re.getString("name"));
                             ui.begin();
                         }
                     }

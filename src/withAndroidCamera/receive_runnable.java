@@ -31,7 +31,7 @@ public class receive_runnable implements Runnable{
                 this.socket.receive(this.packet);
                 byte[] data = packet.getData();
 //                System.out.println(packet.getAddress().getHostAddress()+data.length);
-                ImageIcon image = new ImageIcon(ImageIO.read(new ByteArrayInputStream(data)));
+                ImageIcon image = new ImageIcon(ImageIO. read(new ByteArrayInputStream(data)));
                 image.setImage(image.getImage().getScaledInstance(700,500, Image.SCALE_DEFAULT ));
                 vein_image_panel.setIcon(image);
             } catch (IOException e) {

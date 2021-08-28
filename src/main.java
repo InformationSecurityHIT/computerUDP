@@ -23,7 +23,7 @@ public class main {
 //                    //AWTUtilities.setWindowOpaque(frame, false);//JFrame设置为透明
 //                    frame.setLocationRelativeTo(null);
 //                    frame.setVisible(true);
-                    uimain ui = new uimain(new DBBean());
+                    uimain ui = new uimain(new DBBean(),"");
                     ui.begin();
                 } catch (Exception e) {
                     e.printStackTrace();

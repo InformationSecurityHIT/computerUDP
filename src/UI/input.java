@@ -117,9 +117,9 @@ public class input {
         Tips_text.setFont(new Font("等线", Font.PLAIN, 24));
         Tips_text.setBounds(600, 10, 200, 30);
 
-        id_text = new JLabel("您的ID为：" + finalId);
+        id_text = new JLabel("您的电话为为：" + finalId);
         id_text.setFont(new Font("等线", Font.PLAIN, 24));
-        id_text.setBounds(600, 40, 200, 30);
+        id_text.setBounds(600, 40, 600, 30);
 //
 ////        p2.add(TipsPicture_label);
         p2.add(Tips_text);
@@ -156,6 +156,7 @@ public class input {
                     for (int i = 0; i < 3; i++) {
                         String fileName = "data_before\\" + finalId + "\\" + finalId + "_" + (5*j + i);
                         paths.add(fileName+".png");
+                        //FIXME
                         //这个地方从vein_image_panel中获得图片并保存
                         ImageIcon icon = (ImageIcon) vein_image_panel.getIcon();
                         BufferedImage bi = new BufferedImage(icon.getIconWidth(),
@@ -184,12 +185,9 @@ public class input {
 //                        interruptedException.printStackTrace();
 //                    }
                 }
-
-                //FIXME
-                wCloud.submit(new register_runnable(finalId, paths, wCloud.getSocket()));
                 Tips_text.setText("录入结束");
 //                System.out.println("拍照完成");
-
+                //TODO FIXME 云端
 //                try {
 //                    System.out.println(PATH + "process\\process_all_imgs_for_register.py");
 //                    //调用脚本去处理录入图片

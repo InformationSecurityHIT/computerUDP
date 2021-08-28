@@ -28,7 +28,7 @@ public class uimain {
     private ShowTime st = new ShowTime();
     private SerialPort sport;
     public JFrame frame;
-
+    private Boolean cutHasTouch=false;
     //    public Webcam webcam;
     public JLabel vein_image_panel=new JLabel();//1&2
     public ImageIcon imageShow;
@@ -61,10 +61,12 @@ public class uimain {
     JPanel p4 = new JPanel();
     JLabel hello = new JLabel();
     JLabel title_node = new JLabel();
+    String name;
     //private ShowTime st = new ShowTime();
 
-    public uimain(DBBean db) {
+    public uimain(DBBean db,String name) {
         this.db = db;
+        this.name=name;
     }
 
 //    public class update_label implements Runnable {
@@ -160,7 +162,7 @@ public class uimain {
         hello.setForeground(new Color(102, 102, 102));
         p4.add(hello);
         hello.setFont(new Font("等线", Font.PLAIN, 18));
-        hello.setText("您好！管理员");
+        hello.setText("您好!:"+name);
         title_node.setBounds(20, 0, 400, 75);
         title_node.setOpaque(false);
         title_node.setForeground(new Color(254, 254, 254));
@@ -255,7 +257,12 @@ public class uimain {
 //                        label.setBorder(new MyBorder());
                         p3.removeAll();
 //                        new dis().dispanel(wCamera, p3, db, sport);
-                        new dis().dispanel(p3, db, vein_image_panel);
+                        dis dis = new dis();
+                        dis.dispanel(p3, db, vein_image_panel);
+                        if (cutHasTouch){
+                            dis.setCutName();
+                        }
+                        cutHasTouch=true;
 //                        p3.add(label);
                     }
                 });

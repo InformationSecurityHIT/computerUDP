@@ -11,7 +11,7 @@ import java.util.concurrent.Executors;
 public class withCamera {
 
     //private String host = "172.20.66.214";//android驱动相机的IP地址
-    private int port = 6666;
+    private int port = 7777;
     private DatagramSocket withCameraSocket = null;
     private Executor executor = Executors.newCachedThreadPool();
 
