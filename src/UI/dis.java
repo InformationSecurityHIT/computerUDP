@@ -370,88 +370,33 @@ public class dis {
                     match_message tel_sign = new match_message(db, name_cut, tem_cut);
                     String tel_name = tel_sign.name;
 //                    tel_sign.dispose();
-
                     break;
                 case '4':
-                    try {
-                        ResultSet re = db.executeFind("4", "person", "id");
-                        while (re.next()) {
-                            String name4 = re.getString("name");
-                            name_cut.setText("姓名：" + name4);
-                            tem_cut.setText("体温：" +String.format("%.2f", tempre));
-                            db.executeInsert("record_all" + "(time,tem,location,name)", '\'' + df.format(new Date()) + '\'' + ",'36.53','黑龙江省','" + name4 + '\'');
-                        }
-                    } catch (Exception exception) {
-                        exception.printStackTrace();
-                    }
-                    break;
                 case '5':
-                    try {
-                        ResultSet re = db.executeFind("5", "person", "id");
-                        while (re.next()) {
-                            String name5 = re.getString("name");
-                            name_cut.setText("姓名：" + name5);
-                            tem_cut.setText("体温：" +String.format("%.2f", tempre));
-                            db.executeInsert("record_all" + "(time,tem,location,name)", '\'' + df.format(new Date()) + '\'' + ",'36.53','黑龙江省','" + name5 + '\'');
-                        }
-                    } catch (Exception exception) {
-                        exception.printStackTrace();
-                    }
-                    break;
                 case '6':
-                    try {
-                        ResultSet re = db.executeFind("6", "person", "id");
-                        while (re.next()) {
-                            String name6 = re.getString("name");
-                            name_cut.setText("姓名：" + name6);
-                            tem_cut.setText("体温：" +String.format("%.2f", tempre));
-                            db.executeInsert("record_all" + "(time,tem,location,name)", '\'' + df.format(new Date()) + '\'' + ",'36.47','黑龙江省','" + name6 + '\'');
-                        }
-                    } catch (Exception exception) {
-                        exception.printStackTrace();
-                    }
-                    break;
                 case '7':
-                    try {
-                        ResultSet re = db.executeFind("7", "person", "id");
-                        while (re.next()) {
-                            String name6 = re.getString("name");
-                            name_cut.setText("姓名：" + name6);
-                            tem_cut.setText("体温：" +String.format("%.2f", tempre));
-                            db.executeInsert("record_all" + "(time,tem,location,name)", '\'' + df.format(new Date()) + '\'' + ",'36.47','黑龙江省','" + name6 + '\'');
-                        }
-                    } catch (Exception exception) {
-                        exception.printStackTrace();
-                    }
-                    break;
                 case '8':
-                    try {
-                        ResultSet re = db.executeFind("8", "person", "id");
-                        while (re.next()) {
-                            String name6 = re.getString("name");
-                            name_cut.setText("姓名：" + name6);
-                            tem_cut.setText("体温：" +String.format("%.2f", tempre));
-                            db.executeInsert("record_all" + "(time,tem,location,name)", '\'' + df.format(new Date()) + '\'' + ",'36.47','黑龙江省','" + name6 + '\'');
-                        }
-                    } catch (Exception exception) {
-                        exception.printStackTrace();
-                    }
-                    break;
                 case '9':
-                    try {
-                        ResultSet re = db.executeFind("9", "person", "id");
-                        while (re.next()) {
-                            String name6 = re.getString("name");
-                            name_cut.setText("姓名：" + name6);
-                            tem_cut.setText("体温：" +String.format("%.2f", tempre));
-                            db.executeInsert("record_all" + "(time,tem,location,name)", '\'' + df.format(new Date()) + '\'' + ",'36.47','黑龙江省','" + name6 + '\'');
-                        }
-                    } catch (Exception exception) {
-                        exception.printStackTrace();
-                    }
+                    keyBoardAction(charA);
                     break;
                 default:
                     break;
+            }
+        }
+
+        private void keyBoardAction(char id) {
+            double tempre = 36 + Math.random();
+            String tempString = String.format("%.2f", tempre);
+            try {
+                ResultSet re = db.executeFind(String.valueOf(id), "person", "id");
+                while (re.next()) {
+                    String name6 = re.getString("name");
+                    name_cut.setText("姓名：" + name6);
+                    tem_cut.setText("体温：" +tempString);
+                    db.executeInsert("record_all" + "(time,tem,location,name)", '\'' + df.format(new Date()) + '\'' + ",'"+tempString+"','黑龙江省','" + name6 + '\'');
+                }
+            } catch (Exception exception) {
+                exception.printStackTrace();
             }
         }
 
