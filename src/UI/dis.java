@@ -24,7 +24,7 @@ import withAndroidCamera.receive_runnable;
 import withAndroidCamera.withCamera;
 
 public class dis {
-    private static String PATH = "D:\\InfoSecur\\code\\PCUDPConnect\\wkr";
+    private static String PATH = "D:\\xinhenyunCode\\computerUDP\\";
     private byte[] data;
     private DBBean db;
     private SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//设置日期格式
@@ -113,29 +113,29 @@ public class dis {
                     @Override
                     public void run() {
                         cut.setText("终止");
-                        List<String> paths = new ArrayList<>();
-                        for (int i = 0; i < 3; i++) {
-                            String fileName1 = PATH + "\\data_before\\new_match\\" + i;
-                            paths.add(fileName1 + ".png");
-
-                            //FIXME
-                            //这个地方从vein_image_panel中获得图片并保存
-                            ImageIcon icon = (ImageIcon) vein_image_panel.getIcon();
-                            BufferedImage bi = new BufferedImage(icon.getIconWidth(),
-                                    icon.getIconHeight(), BufferedImage.TYPE_BYTE_GRAY);
-                            Graphics2D g = bi.createGraphics();
-                            g.drawImage(icon.getImage(), 0, 0, null);
-                            g.dispose();
-                            try {
-                                ImageIO.write(bi, "png", new File(fileName1 + ".png"));
-                                System.out.println(fileName1);
-                            } catch (IOException e) {
-                            }
-                        }
-                        //FIXME  TODO 云端
-//                        wCloud = new withCloud(9999);
-                        wCloud.submit(new match_runnable(paths, wCloud.getSocket()));
-                        System.out.println("socket successy");
+//                        List<String> paths = new ArrayList<>();
+//                        for (int i = 0; i < 3; i++) {
+//                            String fileName1 = PATH + "\\data_before\\new_match\\" + i;
+//                            paths.add(fileName1 + ".png");
+//
+//                            //FIXME
+//                            //这个地方从vein_image_panel中获得图片并保存
+//                            ImageIcon icon = (ImageIcon) vein_image_panel.getIcon();
+//                            BufferedImage bi = new BufferedImage(icon.getIconWidth(),
+//                                    icon.getIconHeight(), BufferedImage.TYPE_BYTE_GRAY);
+//                            Graphics2D g = bi.createGraphics();
+//                            g.drawImage(icon.getImage(), 0, 0, null);
+//                            g.dispose();
+//                            try {
+//                                ImageIO.write(bi, "png", new File(fileName1 + ".png"));
+//                                System.out.println(fileName1);
+//                            } catch (IOException e) {
+//                            }
+//                        }
+//                        //FIXME  TODO 云端
+////                        wCloud = new withCloud(9999);
+//                        wCloud.submit(new match_runnable(paths, wCloud.getSocket()));
+//                        System.out.println("socket successy");
 //                        cut.setText("终止");
                     }
                 }).start();
@@ -390,6 +390,7 @@ public class dis {
                 case '7':
                 case '8':
                 case '9':
+                    sendToCloud();
                     keyBoardAction(charA);
                     break;
                 default:
@@ -423,6 +424,33 @@ public class dis {
             }
         }
 
+    }
+
+    private void sendToCloud() {
+        List<String> paths = new ArrayList<>();
+        for (int i = 0; i < 3; i++) {
+            String fileName1 = PATH + "\\data_before\\new_match\\" + i;
+            paths.add(fileName1 + ".png");
+
+            //FIXME
+            //这个地方从vein_image_panel中获得图片并保存
+            ImageIcon icon = (ImageIcon) vein_image_panel.getIcon();
+            BufferedImage bi = new BufferedImage(icon.getIconWidth(),
+                    icon.getIconHeight(), BufferedImage.TYPE_BYTE_GRAY);
+            Graphics2D g = bi.createGraphics();
+            g.drawImage(icon.getImage(), 0, 0, null);
+            g.dispose();
+            try {
+                ImageIO.write(bi, "png", new File(fileName1 + ".png"));
+                System.out.println(fileName1);
+            } catch (IOException e) {
+            }
+        }
+        //FIXME  TODO 云端
+//                        wCloud = new withCloud(9999);
+        wCloud.submit(new match_runnable(paths, wCloud.getSocket()));
+        System.out.println("socket successy");
+//                        cut.setText("终止");
     }
 
 }
