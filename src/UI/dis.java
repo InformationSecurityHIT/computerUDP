@@ -49,7 +49,7 @@ public class dis {
         this.cut.setText("終止");
     }
 
-    private withCloud wCloud = new withCloud(4444);
+    private withCloud wCloud = new withCloud(9999);
 
     private withCamera wCamera = new withCamera(7777);      //与android相机建立连接
     public JLabel vein_image_panel;
